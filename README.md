@@ -11,7 +11,7 @@ https://www.amsmeteors.org
 * Im using IJ to create
 * Im using GRADLE to build
 * You will need to download ChromeDriver from https://chromedriver.chromium.org/downloads
-* Update <TBD> to point to your ChromeDriver
+* Update GebConfig.groovy to point to your ChromeDriver
 
 ### Reference
 Book of Geb : http://www.gebish.org/manual/current/index.html

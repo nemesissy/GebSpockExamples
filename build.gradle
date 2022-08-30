@@ -1,0 +1,55 @@
+group 'com.nemesissy'
+version '0.0'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.8
+
+ext {
+    // The drivers we want to use
+    drivers = ["chrome", "chromeHeadless"]
+
+    ext {
+        groovyVersion = '2.4.16'
+        gebVersion = '2.3.1'
+        seleniumVersion = '3.14.0'
+        chromeDriverVersion = '73.0.3683.68'
+        geckoDriverVersion = '0.24.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-api:2.18.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
+    implementation group: 'org.testng', name: 'testng', version: '6.14.3'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
+    implementation group: 'org.testng', name: 'testng', version: '6.10'
+
+    implementation "org.gebish:geb-spock:$gebVersion"
+    implementation("org.spockframework:spock-core:1.1-groovy-2.4") {
+        exclude group: "org.codehaus.groovy"
+    }
+    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+    implementation "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
+
+}
+//
+// Groovy tools excluding tests
+//
+drivers.each { driver ->
+    task "${driver}Tool"(type: Test) {
+        group JavaBasePlugin.VERIFICATION_GROUP
+        outputs.upToDateWhen { false }  // Always run tests
+        systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
+        systemProperty "geb.env", driver
+        exclude "tests"
+    }
+}

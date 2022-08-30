@@ -1,4 +1,4 @@
-# TestNGExamples
+# GEB Spock Examples
 
 ### App Under Test ###
 
@@ -13,15 +13,16 @@ https://www.amsmeteors.org
 * You will need to download ChromeDriver from https://chromedriver.chromium.org/downloads
 * Update <TBD> to point to your ChromeDriver
 
+### Reference
+Book of Geb : http://www.gebish.org/manual/current/index.html
+Spock Primer: https://spockframework.org/spock/docs/2.1/spock_primer.html
+
 ### Run all Tests
 
-$ <TBD>
-
-### Run a  singe test
-$ <TBD>
+$ ./gradlew build
 
 ### Location of the HTML report
-<TBD>
+./build/reports/tests/test/index.html
 
 ### Usages
 * Page Object Modeling
